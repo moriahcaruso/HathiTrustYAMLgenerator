@@ -3,9 +3,8 @@
 This repository, cloned from that indicated above, includes python scripts and documentation for generating YAML files for HathiTrust uploads.  
 The purpose of creating this repository is to customize the script(s) and documentation for use in the University of Washington Preservation Services unit.
 
-# How-to documentation from [the the original readme file](https://github.com/ruthtillman/yaml-generator-for-hathitrust/blob/master/README.md):
-
-# YAML Generator for Digitized HathiTrust Submissions
+# YAML Generator for Digitized HathiTrust Submissions  
+## (How-to documentation from [the the original readme file](https://github.com/ruthtillman/yaml-generator-for-hathitrust/blob/master/README.md))
 
 The HathiTrust submissions process requires a .yml file whose contents contain information about the scan and a detailed contents list. The contents list can include information about reading order, chapters, and page type. This Python (2.7.x) script allows one to generate a valid .yml file for *digitized* (not born-digital) materials. With some minor modifications it could work for born-digital materials too.
 
