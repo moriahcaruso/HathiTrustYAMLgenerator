@@ -1,4 +1,4 @@
-import re, os
+import re, os, csv
 
 # A function that handles all the defaults and input for scanning information:
 def scanningAndScannerInfo(f):
@@ -96,36 +96,37 @@ def generateFileName(prefix, suffix, fileType):
 # Handles and incrementations for orderNum and romanInt
 def generateOrderLabel(fileNum):
 	global readingStartNum, readingEndNum, orderNum, orderLabel, romanCap, romanInt, romanStart
-	if fileNum == readingStartNum:
+	if fileNum == int(readingStartNum):
 		orderNum = 1
-	if fileNum == romanStart:
+	if fileNum == int(romanStart):
 		romanInt = 1
 	orderLabel = ''
-	if romanCap != 0:
-		if romanStart <= fileNum <= romanCap:
+	if int(romanCap) != 0:
+		if int(romanStart) <= fileNum <= int(romanCap):
 			orderLabel = 'orderlabel: "' + toRoman(romanInt) + '"'
 			romanInt += 1
-		elif romanCap < romanInt:
+		elif int(romanCap) < romanInt:
 			orderLabel = ''
-	if readingStartNum <= fileNum <= readingEndNum and fileNum not in unpaginatedPages:
+	if int(readingStartNum) <= fileNum <= int(readingEndNum) and fileNum not in unpaginatedPages:
 		orderLabel = 'orderlabel: "' + str(orderNum) + '"'
 		orderNum += 1
 
 # If this is a Multiwork item (note, does not function right if no multiwork boundary input), casts the numbers to start/end lists, then defines start/end numbers. Lots of globals because they'll need to be manipulated more elsewhere.
 def defineMultiWorkLists():
 	global readingStartNum, readingEndNum, multiworkStartList, multiworkEndList, romanStartList, romanEndList, romanStart, romanCap
-	multiworkStartList = list(readingStartNum)
-	multiworkEndList = list(readingEndNum)
+	multiworkStartList = map(int, readingStartNum.split(", "))
+	multiworkEndList = map(int, readingEndNum.split(", "))
 	readingStartNum = multiworkStartList[0]
 	readingEndNum = multiworkEndList[0]
-	if type(romanStart).__name__ != 'int':
-		romanStartList = list(romanStart)
-		romanEndList = list(romanCap)
+	if ", " in romanStart:
+		romanStartList = map(int, romanStart.split(", "))
+		romanEndList = map(int, romanCap.split(", "))
 		romanStart = romanStartList[0]
 		romanCap = romanEndList[0]
-	if type(romanStart).__name__ != 'int':
-		romanStart = romanStart
-		romanCap = romanCap
+#	if type(romanStart).__name__ != 'int':
+#		romanStart = romanStart
+#		romanCap = romanCap
+# This section seemed duplicative? But we'll see? The "if" clause is wrong for the CSV verion though...so would have to make sure that's fixed if actually deploying.
 
 # Handles Start/End lists, pops off the first (0) number in the list, then resets start/end numbers. Again using globals because they'll need to be manipulated elsewhere.
 def defineMultiworkCycle(fileNum):
@@ -176,38 +177,71 @@ def fromRoman(s):
 	return result
 
 # Processes inputs for various page numbers. Casts everything but covers, because there should only be one, into lists if they're not already lists. Could almost definitely be improved.
+# When coming from CSV, types are always now 'str'. So how
+
 def inputToLists():
 	global blankPages, chapterPages, chapterStart, copyrightPages, firstChapterStart, foldoutPages, imagePages, indexStart, multiworkBoundaries, prefacePages, referenceStartPages, tableOfContentsStarts, titlePages, halfTitlePages, unpaginatedPages
-	if type(blankPages).__name__ == 'int':
-		blankPages = [blankPages]
-	if type(chapterPages).__name__ == 'int':
-		chapterPages = [chapterPages]
-	if type(chapterStart).__name__ == 'int':
-		chapterStart = [chapterStart]
-	if type(copyrightPages).__name__ == 'int':
-		copyrightPages = [copyrightPages]
-	if type(firstChapterStart).__name__ == 'int':
-		firstChapterStart = [firstChapterStart]
-	if type(foldoutPages).__name__ == 'int':
-		foldoutPages = [foldoutPages]
-	if type(imagePages).__name__ == 'int':
-		imagePages = [imagePages]
-	if type(indexStart).__name__ == 'int':
-		indexStart = [indexStart]
-	if type(multiworkBoundaries).__name__ == 'int':
-		multiworkBoundaries = [multiworkBoundaries]
-	if type(prefacePages).__name__ == 'int':
-		prefacePages = [prefacePages]
-	if type(unpaginatedPages).__name__ == 'int':
-		unpaginatedPages = [unpaginatedPages]
-	if type(referenceStartPages).__name__ == 'int':
-		referenceStartPages = [referenceStartPages]
-	if type(tableOfContentsStarts).__name__ == 'int':
-		tableOfContentsStarts = [tableOfContentsStarts]
-	if type(titlePages).__name__ == 'int':
-		titlePages = [titlePages]
-	if type(halfTitlePages).__name__ == 'int':
-		halfTitlePages = [halfTitlePages]
+	if ", " in blankPages:
+		 blankPages = map(int, blankPages.split(", "))
+	else:
+		blankPages = [int(blankPages)]
+	if ", " in chapterPages:
+		 chapterPages = map(int, chapterPages.split(", "))
+	else:
+		chapterPages = [int(chapterPages)]
+	if ", " in chapterStart:
+		 chapterStart = map(int, chapterStart.split(", "))
+	else:
+		chapterStart = [int(chapterStart)]
+	if ", " in copyrightPages:
+		 copyrightPages = map(int, copyrightPages.split(", "))
+	else:
+		copyrightPages = [int(copyrightPages)]
+	if ", " in firstChapterStart:
+		 firstChapterStart = map(int, firstChapterStart.split(", "))
+	else:
+		firstChapterStart = [int(firstChapterStart)]
+	if ", " in foldoutPages:
+		 foldoutPages = map(int, foldoutPages.split(", "))
+	else:
+		foldoutPages = [int(foldoutPages)]
+	if ", " in imagePages:
+		 imagePages = map(int, imagePages.split(", "))
+	else:
+		imagePages = [int(imagePages)]
+	if ", " in indexStart:
+		 indexStart = map(int, indexStart.split(", "))
+	else:
+		indexStart = [int(indexStart)]
+	if ", " in multiworkBoundaries:
+		 multiworkBoundaries = map(int, multiworkBoundaries.split(", "))
+	else:
+		multiworkBoundaries = [int(multiworkBoundaries)]
+	if ", " in prefacePages:
+		 prefacePages = map(int, prefacePages.split(", "))
+	else:
+		prefacePages = [int(prefacePages)]
+	if ", " in unpaginatedPages:
+		 unpaginatedPages = map(int, unpaginatedPages.split(", "))
+	else:
+		unpaginatedPages = [int(unpaginatedPages)]
+	if ", " in referenceStartPages:
+		 referenceStartPages = map(int, referenceStartPages.split(", "))
+	else:
+		referenceStartPages = [int(referenceStartPages)]
+	if ", " in tableOfContentsStarts:
+		 tableOfContentsStarts = map(int, tableOfContentsStarts.split(", "))
+	else:
+		tableOfContentsStarts = [int(tableOfContentsStarts)]
+	if ", " in titlePages:
+		 titlePages = map(int, titlePages.split(", "))
+	else:
+		titlePages = [int(titlePages)]
+	if ", " in halfTitlePages:
+		 halfTitlePages = map(int, halfTitlePages.split(", "))
+	else:
+		halfTitlePages = [int(halfTitlePages)]
+
 
 # Handles the reading labels. Uses list function which then gets split apart, so that multiple labels can apply to same page if relevant.
 def generateLabel(fileNum):
@@ -252,10 +286,11 @@ def generateLabel(fileNum):
 		label = 'label: ' + ', '.join(labelList)
 
 # Combines all functions to write the file.
-def writeFile(finalNumber, readingStartNum, readingEndNum, fileType, outputFile, romanCap, workingDir):
-	global orderNum, multiworkEndList, romanEndList, romanInt
+def writeFile():
+	global finalNumber, readingStartNum, readingEndNum, fileType, outputFile, romanCap, workingDir, orderNum, multiworkEndList, romanEndList, romanInt
 	originalDir = os.getcwd()
 	os.chdir(workingDir)
+	outputFile = outputFile + '.yml'
 	f = open(outputFile, 'w')
 	scanningAndScannerInfo(f)
 	f.write('pagedata:\n')
@@ -287,67 +322,163 @@ def writeFile(finalNumber, readingStartNum, readingEndNum, fileType, outputFile,
 # Putting input into a function vs. having a huge list of inputs at the end.
 def gatherInput():
 	global fileType, workingDir, finalNumber, readingStartNum, readingEndNum, frontCover, outputFile, backCover, blankPages, chapterPages, chapterStart, copyrightPages, firstChapterStart, foldoutPages, imagePages, indexStart, multiworkBoundaries, prefacePages, referenceStartPages, tableOfContentsStarts, titlePages, halfTitlePages, romanStart, romanCap, scanYearMonthDay, scanTime, DST, scannerModelInput, scannerMakeInput, bitoneResInput, contoneResInput, compressionDST, imageCompression, imageCompressionTime, imageCompressionTool, imageCompressionYearMonthDay, imageCompressionTime, imageCompressionAgent, imageCompressionToolList, scanningOrderInput, readingOrderInput, unpaginatedPages
-	print 'INSTRUCTIONS:\n1. When listing multiple numbers, separate with a comma and space, e.g. "1, 34"\n\n2. Some entries such as first chapter should only have multiple entries if multiple works are bound together, such as two journal volumes.\n\n3. When a question doesn\'t apply and isn\'t Y/N, ENTER 0. Not entering anything will confuse the program.\n\n4. Do not use quotation marks.\n'
-	workingDir = raw_input("Input the directory in which the finished file should be placed: ")
-	outputFile = raw_input("Name of the file to be created or overwritten (Include extension, e.g. meta.yml): ")
-	print 'The following sequence of questions have to do with the scanning itself.\n'
-	scanYearMonthDay = raw_input("What is the date of the scan, formatted as YYYY-MM-DD, e.g. 2015-04-01? ")
-	while not re.match('(19|20|21)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[0-1])', scanYearMonthDay) :
-	    print 'The date was invalid. Please use the YYYY-MM-DD format.'
-	    scanYearMonthDay = raw_input("What is the date of the scan, formatted as YYYY-MM-DD, e.g. 2015-04-01? ")
-	scanTime = raw_input("What was the time of the scan in 24-hour time, e.g. 09:30 or 15:45? ")
-	while not re.match('(0\d|1\d|2[0-4])\:([0-5]\d)', scanTime) :
-	    print 'The time was invalid, please input as 24-hour time, e.g. 07:15 or 20:21.'
-	    scanTime = raw_input("What was the time of the scan in 24-hour time, e.g. 09:30 or 15:45? ")
-	DST = raw_input("Was it daylight savings time: Y/N? ")
-	scannerMakeInput = raw_input("If this was scanned on the Kirtas, enter 'YES' or 'Y'. Otherwise enter the name of the scanner make (e.g. Bookeye): ")
-	scannerModelInput = raw_input("If this was scanned on the Kirtas, enter 'YES' or 'Y'. Otherwise enter the name of the scanner model (e.g. 4 V1A): ")
-	bitoneResInput = raw_input("What is the dpi resolution of bitone, b&w, images (input just numbers, e.g. 600)? Or enter '0' if none exist: ")
-	while not re.match('(0|\d{3}|\d{4})', bitoneResInput):
-		print "The number you entered was not three or four digits. Please re-input as 300 or 600 or 1000, etc.  Or enter '0' if none exist:"
-		bitoneResInput = raw_input("What is the dpi resolution of bitone, b&w, images (input just numbers, e.g. 600)? Or enter '0' if none exist: ")
-	contoneResInput = raw_input("What is the dpi resolution of contone, grayscale or color, images (input just numbers, e.g. 400)? Or enter '0' if none exist: ")
-	while not re.match('(0|\d{3}|\d{4})', contoneResInput):
-		print "The number you entered was not three or four digits. Please re-input as 300 or 600 or 1000, etc. Or enter '0' if none exist: "
-		contoneResInput = raw_input("What is the dpi resolution of contone, grayscale or color, images (input just numbers, e.g. 400)? Or enter '0' if none exist: ")
-	imageCompression = raw_input("If any of the images are compressed, enter 'YES' or 'Y': ")
-	if imageCompression.lower() == 'yes' or imageCompression.lower() == 'y':
-		imageCompressionYearMonthDay = raw_input("What is the date of the compression, formatted as YYYY-MM-DD, e.g. 2015-04-01? ")
-		while not re.match('(19|20|21)\d{2}\-(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[0-1])', imageCompressionYearMonthDay) :
-		    print 'The date was invalid. Please use the YYYY-MM-DD format.'
-		    imageCompressionYearMonthDay = raw_input("What is the date of the scan, formatted as YYYY-MM-DD, e.g. 2015-04-01? ")
-		imageCompressionTime = raw_input("What was the time of the compression in 24-hour time, e.g. 09:30 or 15:45? ")
-		while not re.match('(0\d|1\d|2[0-4])\:([0-5]\d)', imageCompressionTime) :
-		    print 'The time was invalid, please input as 24-hour time, e.g. 07:15 or 20:21.'
-		    imageCompressionTime = raw_input("What was the time of the scan in 24-hour time, e.g. 09:30 or 15:45? ")
-		compressionDST = raw_input("Was compression done during daylight savings time: Y/N? ")
-		imageCompressionToolList = raw_input("What tools were used to compress the images? Include versions. Separate with comma and space, e.g. kdu_compress v7.2.3, ImageMagick 6.7.8: ")
-	scanningOrderInput = raw_input("Was the book scanned left-to-right (normal English reading order), Y/N? ")
-	print "This section gathers information about the book's files and reading order."
-	readingOrderInput = raw_input("Is the book READ left-to-right (normal English reading order), Y/N? ")
-	fileType = raw_input("What is the filename extension of the images? ")
-	finalNumber = input("What is the total number of image files? ")
-	frontCover = input("What file number is the front cover? ")
-	halfTitlePages = input("List the file numbers of any half title pages (preliminary title pages often before the first title page, little or no information on reverse): ")
-	titlePages = input("List file number of any title pages (one per work): ")
-	copyrightPages = input("List the file number of the title page verso (back of title page containing copyright info) for each work: ")
-	tableOfContentsStarts = input("List file numbers of the first page of any Table of Contents: ")
-	romanStart = input("List the file number on which any Roman numerals start: ")
-	romanCap = input("List the file number on which any Roman numerals end: " )
-	prefacePages = input("List the file number of each Preface, defined as sections that appear between the title page verso/copyright and page 1. Do not list any Prefaces beginning on or after page 1: ")
-	readingStartNum = input("What is the file number on which page 1 occurs? ")
-	firstChapterStart = input("List the file number of the first chapter on a regularly-numbered page (may be Preface) for each work: ")
-	chapterPages = input("List the file numbers of pages containing only chapter names: ")
-	chapterStart = input("List file numbers of the start of each chapter **EXCEPT** the first, including appendices: ")
-	readingEndNum = input("What is the file number on which the final NUMBERED page occurs? ")
-	blankPages = input("List the file numbers of any blank pages: ")
-	unpaginatedPages = input("List the file numbers of any pages outside the pagination sequence (not unpaginated but entirely skipped, such as photographic inserts): ")
-	imagePages = input("List the file number of any page which is only an image: ")
-	foldoutPages = input("List the file number of any page that is a scan of a foldout: ")
-	indexStart = input("List the file number of any pages which are the FIRST page of an index: ")
-	referenceStartPages = input("List the file number of the first page of any set of references or bibliography: ")
-	multiworkBoundaries = input("List the file number of any multi-work boundaries: ")
-	backCover = input("What is the file number of the back cover? ")
+	pathToFile = raw_input("Provide a link to the CSV file: ")
+	workingDir = raw_input("Provide the directory in which the finished file should be placed: ")
+	hathi_file = open(pathToFile)
+	hathi_csv = csv.reader(hathi_file)
+	for row in hathi_csv:
+		if row[0] == '':
+			outputFile = 'no_barcode'
+		else:
+			outputFile = row[0]
+		if row[1] == '':
+		    scanYearMonthDay = "0"
+		else:
+		    scanYearMonthDay = row[1]
+		if row[2] == '':
+		    scanTime = "0"
+		else:
+		    scanTime = row[2]
+		if row[3] == '':
+		    DST = "0"
+		else:
+		    DST = row[3]
+		if row[6] == '':
+		    bitoneResInput = "0"
+		else:
+		    bitoneResInput = row[6]
+		if row[7] == '':
+		    contoneResInput = "0"
+		else:
+		    contoneResInput = row[7]
+		if row[12] == '':
+		    scanningOrderInput = 'Y'
+		else:
+		    scanningOrderInput = row[12]
+		if row[13] == '':
+		    readingOrderInput = 'Y'
+		else:
+		    readingOrderInput = row[13]
+		if row[15] == '':
+		    finalNumber = 0
+		else:
+		    finalNumber = int(row[15])
+		if row[16] == '':
+		    frontCover = 0
+		else:
+		    frontCover = int(row[16])
+		if row[17] == '':
+		    halfTitlePages = "0"
+		else:
+		    halfTitlePages = row[17]
+		if row[18] == '':
+		    titlePages = "0"
+		else:
+		    titlePages = row[18]
+		if row[19] == '':
+		    copyrightPages = "0"
+		else:
+		    copyrightPages = row[19]
+		if row[20] == '':
+		    tableOfContentsStarts = "0"
+		else:
+		    tableOfContentsStarts = row[20]
+		if row[21] == '':
+		    romanStart = "0"
+		else:
+		    romanStart = row[21]
+		if row[22] == '':
+		    romanCap = "0"
+		else:
+		    romanCap = row[22]
+		if row[23] == '':
+		    prefacePages = "0"
+		else:
+		    prefacePages = row[23]
+		if row[24] == '':
+		    readingStartNum = "0"
+		else:
+		    readingStartNum = row[24]
+		if row[25] == '':
+		    firstChapterStart = "0"
+		else:
+		    firstChapterStart = row[25]
+		if row[26] == '':
+		    chapterPages = "0"
+		else:
+		    chapterPages = row[26]
+		if row[27] == '':
+		    chapterStart = "0"
+		else:
+		    chapterStart = row[27]
+		if row[28] == '':
+		    readingEndNum = "0"
+		else:
+		    readingEndNum = row[28]
+		if row[29] == '':
+		    blankPages = "0"
+		else:
+		    blankPages = row[29]
+		if row[30] == '':
+		    unpaginatedPages = "0"
+		else:
+		    unpaginatedPages = row[30]
+		if row[31] == '':
+		    imagePages = "0"
+		else:
+		    imagePages = row[31]
+		if row[32] == '':
+		    foldoutPages = "0"
+		else:
+		    foldoutPages = row[32]
+		if row[33] == '':
+		    indexStart = "0"
+		else:
+		    indexStart = row[33]
+		if row[34] == '':
+		    referenceStartPages = "0"
+		else:
+		    referenceStartPages = row[34]
+		if row[35] == '':
+		    multiworkBoundaries = "0"
+		else:
+		    multiworkBoundaries = row[35]
+		if row[36] == '':
+		    backCover = 0
+		else:
+		    backCover = int(row[36])
+		if row[14] == '':
+		    fileType = 'tif'
+		else:
+		    fileType = row[14]
+		if row[4] == '':
+		    scannerMakeInput = 'y'
+		else:
+		    scannerMakeInput = row[4]
+		if row[5] == '':
+		    scannerModelInput = 'y'
+		else:
+		    scannerModelInput = row[5]
+		if row[8] == '':
+		    imageCompression = 'n'
+		else:
+		    imageCompression = 'y'
+		if row[8] == '':
+		  imageCompressionYearMonthDay = "0"
+		else:
+		  imageCompressionYearMonthDay = row[8]
+		if row[9] == '':
+		  imageCompressionTime = "0"
+		else:
+		  imageCompressionTime = row[9]
+		if row[10] == '':
+		  compressionDST = "0"
+		else:
+		  compressionDST = row[10]
+		if row[11] == '':
+		  imageCompressionToolList = "0"
+		else:
+		  imageCompressionToolList = row[11]
+		writeFile()
 
 gatherInput()
-writeFile(finalNumber, readingStartNum, readingEndNum, fileType, outputFile, romanCap, workingDir)
