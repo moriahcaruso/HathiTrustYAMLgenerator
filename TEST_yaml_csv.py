@@ -11,15 +11,15 @@ def scanningAndScannerInfo(f):
 	captureDate = 'capture_date: ' + scanYearMonthDay + 'T' + scanTime + ':00-0' + DSTOffset + ':00\n'
 	# Default scanner values changed to BookDrive Mark II
 	if scannerMakeInput.lower() == 'yes' or scannerMakeInput.lower() == 'y':
-		scannerMake = 'scanner_make: BookDrive\n'
+		scannerMake = 'scanner_make: Atiz\n'
 	else:
 		scannerMake = 'scanner_make: ' + scannerMakeInput + '\n'
 	if scannerModelInput.lower() == 'yes' or scannerModelInput.lower() == 'y':
-		scannerModel = 'scanner_model: Mark II\n'
+		scannerModel = 'scanner_model: BookDrive Mark II\n'
 	else:
 		scannerModel = 'scanner_model: ' + scannerModelInput + '\n'
 	# Default scanner user changed to UWL PS
-	scannerUser = 'scanner_user: "University of Washington Libraries Preservation Services"\n'
+	scannerUser = 'scanner_user: "University of Washington"\n'
 	if bitoneResInput != '0':
 		bitoneRes = 'bitonal_resolution_dpi: ' + bitoneResInput + '\n'
 	else:
@@ -30,6 +30,7 @@ def scanningAndScannerInfo(f):
 		contoneRes = ''
 	if imageCompression.lower() == 'yes' or imageCompression.lower() == 'y':
 		# Only the Agent has been changed, all other image compression defaults, etc., are as in original code
+		# For further development--change script so that no compression info is put into YAML if no values are present
 		imageCompressionAgent = 'image_compression_agent: universityofwashington\n'
 		if compressionDST.lower() == 'yes' or compressionDST.lower() == 'y':
 			compressionDSTOffset = '6'
