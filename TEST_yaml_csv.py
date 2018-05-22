@@ -5,9 +5,9 @@ import re, os, csv
 def scanningAndScannerInfo(f):
 	global captureDate, scannerMake, scannerModel, scannerUser, bitoneRes, contoneRes, scanningOrder, readingOrder, imageCompressionAgent, imageCompressionDate, imageCompressionTool, imageCompressionToolList
 	if DST.lower() == 'yes' or DST.lower() == 'y':
-		DSTOffset = '8'
-	else:
 		DSTOffset = '7'
+	else:
+		DSTOffset = '8'
 	captureDate = 'capture_date: ' + scanYearMonthDay + 'T' + scanTime + ':00-0' + DSTOffset + ':00\n'
 	# Default scanner values changed to BookDrive Mark II
 	if scannerMakeInput.lower() == 'yes' or scannerMakeInput.lower() == 'y':
