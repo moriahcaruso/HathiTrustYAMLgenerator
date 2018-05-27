@@ -1,24 +1,25 @@
 import re, os, csv
 
 # A function that handles all the defaults and input for scanning information:
+# DST offset changed from original code to Seattle time
 def scanningAndScannerInfo(f):
 	global captureDate, scannerMake, scannerModel, scannerUser, bitoneRes, contoneRes, scanningOrder, readingOrder, imageCompressionAgent, imageCompressionDate, imageCompressionTool, imageCompressionToolList
 	if DST.lower() == 'yes' or DST.lower() == 'y':
-		DSTOffset = '6'
+		DSTOffset = '7'
 	else:
-		DSTOffset = '5'
+		DSTOffset = '8'
 	captureDate = 'capture_date: ' + scanYearMonthDay + 'T' + scanTime + ':00-0' + DSTOffset + ':00\n'
-	# SPECIFIC TO NOTRE DAME
+	# Default scanner values changed to BookDrive Mark II
 	if scannerMakeInput.lower() == 'yes' or scannerMakeInput.lower() == 'y':
-		scannerMake = 'scanner_make: Kirtas\n'
+		scannerMake = 'scanner_make: Atiz\n'
 	else:
 		scannerMake = 'scanner_make: ' + scannerMakeInput + '\n'
 	if scannerModelInput.lower() == 'yes' or scannerModelInput.lower() == 'y':
-		scannerModel = 'scanner_model: APT 1200\n'
+		scannerModel = 'scanner_model: BookDrive Mark II\n'
 	else:
 		scannerModel = 'scanner_model: ' + scannerModelInput + '\n'
-	# SPECIFIC TO NOTRE DAME
-	scannerUser = 'scanner_user: "Notre Dame Hesburgh Libraries: Digital Production Unit"\n'
+	# Default scanner user changed to UWL PS
+	scannerUser = 'scanner_user: "University of Washington"\n'
 	if bitoneResInput != '0':
 		bitoneRes = 'bitonal_resolution_dpi: ' + bitoneResInput + '\n'
 	else:
@@ -28,8 +29,9 @@ def scanningAndScannerInfo(f):
 	else:
 		contoneRes = ''
 	if imageCompression.lower() == 'yes' or imageCompression.lower() == 'y':
-		# SPECIFIC TO NOTRE DAME
-		imageCompressionAgent = 'image_compression_agent: notredame\n'
+		# Only the Agent has been changed, all other image compression defaults, etc., are as in original code
+		# For further development--change script so that no compression info is put into YAML if no values are present
+		imageCompressionAgent = 'image_compression_agent: universityofwashington\n'
 		if compressionDST.lower() == 'yes' or compressionDST.lower() == 'y':
 			compressionDSTOffset = '6'
 		else:
