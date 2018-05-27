@@ -33,23 +33,23 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 | TITLE_PARTS | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "Half title page (a sort of preliminary title page before the real one)" |
 | TITLE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "Title page recto (the front of the real title page)" |
 | COPYRIGHT | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "Title page verso (the back of the real title page)" |
-| TABLE_OF_CONTENTS | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "First page of the table of contents" OR, we might say "The *image file number* of the first page of the table of contents" |
+| TABLE_OF_CONTENTS | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "First page of the table of contents" |
 | Roman Numeral Start | |
 | End Roman Numerals | |
-| PREFACE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "First page of each section that appears between the title page verso and the first regularly numbered page. For example, a one-page dedication on page xvi would get this tag, and then the first page of a three-page preface starting on page xviii would also get this.  However, if the introduction of the text starts on page 1 (or on an unnumbered page followed by page 2), do not use this tag. Use for components occurring before and after the table of contents. " |
-| Page 1 | |
-| FIRST_CONTENT_CHAPTER_START | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| CHAPTER_PAGE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| CHAPTER_START | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
+| PREFACE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "First page of each section that appears between the title page verso and the first regularly numbered page. For example, a one-page dedication on page xvi would get this tag, and then the first page of a three-page preface starting on page xviii would also get this.  However, if the introduction of the text starts on page 1 (or on an unnumbered page followed by page 2), do not use this tag. Use for components occurring before and after the table of contents." |
+| Page 1 | Only one entry is allowed here, even for items using the MULTIWORK_BOUNDARY tag described below. (ALSO ADD NOTES HERE ABOUT HOW I USED THE TAG IN MOST ITEMS VS A FEW ITEMS WITH PRELIMINARY MATERIAL -BR) |
+| FIRST_CONTENT_CHAPTER_START | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "First page of the first chapter with regular page numbering. If the first chapter with regular numbering is called the introduction, that's okay." |
+| CHAPTER_PAGE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "A sort of half title page for a chapter of grouping of chapters -- that is, a page that gives the name of the chapter or section that begins on the next page." |
+| CHAPTER_START | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "Subsequent chapters with regular page numbering after the first. Also use this for the beginning of each appendix." |
 | Final Page | |
-| BLANK | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
+| BLANK | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "An intentionally blank page." |
 | Unpaginated | |
-| IMAGE_ON_PAGE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| FOLDOUT | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| INDEX | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| REFERENCES | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| MULTIWORK_BOUNDARY | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
-| BACK_COVER | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "" |
+| IMAGE_ON_PAGE | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "Use for plates (pages with only images, which often do not contain the regular page numbering)" |
+| FOLDOUT | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "A page that folded out of the print original" |
+| INDEX | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "The first page in a sequence containing an index" |
+| REFERENCES | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "The first page in a sequence containing endnotes or a bibliography" |
+| MULTIWORK_BOUNDARY | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "[F]or items with multiple volumes bound together" |
+| BACK_COVER | [HT example YAML file](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view): "Image of the back cover" |
   
 ## Generating a YAML file for upload
 - Download the sheet with input values in CSV format.
