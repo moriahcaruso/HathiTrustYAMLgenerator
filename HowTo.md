@@ -1,4 +1,4 @@
-# How-to: CSV to YAML  
+# How-to: Spreadsheet to CSV to YAML (.yml) file
 ### *(Please note that this documentation is currently under construction.)*  
 ## Recording item information
 Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p4iouy6OBnflIgYaC_AVBDDvhF_pym7eYVc6RMc/edit?usp=sharing)**. Fill in the required item information as detailed below.  
@@ -24,8 +24,8 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 | Compression Time HH:MM | Enter "N" if captured images are uncompressed. |
 | Compression DST: Y/N | Enter "N" if captured images are uncompressed. |
 | Compression Tool(s) | Enter "N" if captured images are uncompressed. |
-| Scanning Order (L->R) | |
-| Reading Order (L->R) | |
+| Scanning Order ("Y"=L->R)) | Enter "Y" for books that were scanned from left to right. *See note 2 below.*|
+| Reading Order ("Y"=L->R) | Enter "Y" for books that should be read from left to right. *See note 2 below.* |
 | Filename extension | |
 | Total number of images | |
 | FRONT_COVER | |
@@ -58,5 +58,6 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 - If images are uncompressed, the *image_compression_date*, *image_compression_agent*, and *image_compression_tool* lines should be deleted from output YAML files prior to upload. (See [NeededImprovements.md](NeededImprovements.md).)
 
 ### Notes:  
-- Quotation marks are used above to indicate specific values for entry, but should *not* be entered in the spreadsheet.
-- ADD NOTES ABOUT COMPRESSION FIELDS / MANUAL DELETION / NEED FOR SCRIPT IMPROVEMENT HERE.
+1. Quotation marks are used above to indicate specific values for entry, but should *not* be entered in the spreadsheet.
+2. From yaml-generator-for-hathitrust, [field_guide.md](https://github.com/ruthtillman/yaml-generator-for-hathitrust/blob/master/field_guide.md):  
+   - **Important Note:** While HathiTrust can handle books where the last page or back cover is 00000001, this YAML output tool can only handle "normal" English reading order if books were scanned in the same direction as they should be read. i.e. if they should be read right-to-left, then it can handle a right-to-left scan, but it can't handle a book read left-to-right but scanned right-to-left. 
