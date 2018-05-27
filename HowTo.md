@@ -3,12 +3,14 @@
 ## Recording item information
 Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p4iouy6OBnflIgYaC_AVBDDvhF_pym7eYVc6RMc/edit?usp=sharing)**. Fill in the required item information as detailed below.  
 
-- By entering information for multiple items in individual rows, multiple YAML files may be generated at once.
+- By entering information for multiple items in successive rows, multiple YAML files may be generated at once.
 - To prevent any alteration to date formats, etc., which would prevent processing, apply plain-text formatting to all cells in the data-entry spreadsheet.
 - An example spreadsheet complete with input values is available [here](https://docs.google.com/spreadsheets/d/1ixc8uVCmZAgtEU8S446XntZoeRVsCPcLSX_R-KnLD_4/edit?usp=sharing).
 - Example output YAML files--both generated from the sample spreadsheet above--are available **[here](https://drive.google.com/a/uw.edu/file/d/1XL9BSejpJKPZbwVYZAmtgE4CiJe2pRmT/view?usp=sharing)** and **[here](https://drive.google.com/a/uw.edu/file/d/1MNK9B0tXiLXbOJW8AZ6pKKT5b-7uj5NY/view?usp=sharing)**. Note that YAML files output by the script will have the file extension ".yml", not "_YAML.txt" as with these sample files.
 - Much of the documentation below has been taken directly from [ruthtillman's](https://github.com/ruthtillman) [yaml-generator-for-hathitrust](https://github.com/ruthtillman/yaml-generator-for-hathitrust) repository, which is the source of the Python script used here.
-- Information regarding conventions for the use of page tags (in ALL CAPS in the table below) was taken directly from HathiTrust documentation available **[here](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view)**.  
+- Column headings in ALL CAPS below (FRONT_COVER, COPYRIGHT, etc.) are HathiTrust page tags, and image file numbers input in these columns will be tagged as such. The page-tag information given below was taken directly from a HathiTrust-provided example YAML file available **[here](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view)**.  (The example YAML file is linked to from the [HathiTrust Cloud Validation and Packaging Service document](https://docs.google.com/document/d/1OQ0SKAiOH8Xi0HVVxg4TryBrPUPtdv4qA70d8ghRltU/edit?usp=sharing).
+- It is important to remember that anytime you enter a number in the spreadsheet to indicate a captured page image or images, you are entering the number(s) for an *image file* or set of *image files*, **not** for pages in a book or document, the numbering of which will of course differ from that of image files. 
+- When entering image numbers in the spreadsheet, exclude leading zeros and filename extensions. For example, to input 00000001.tif, in the FRONT_COVER column, enter "1".
 
 | Column Heading | Input Instructions |
 | --- | --- |
@@ -24,10 +26,10 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 | Compression Time HH:MM | Enter "N" if captured images are uncompressed. |
 | Compression DST: Y/N | Enter "N" if captured images are uncompressed. |
 | Compression Tool(s) | Enter "N" if captured images are uncompressed. |
-| Scanning Order ("Y"=L->R)) | Enter "Y" for books that were scanned from left to right. *See note 2 below.*|
-| Reading Order ("Y"=L->R) | Enter "Y" for books that should be read from left to right. *See note 2 below.* |
-| Filename extension | |
-| Total number of images | |
+| Scanning Order ("Y"=L->R)) | Enter "Y" for books that were scanned from left to right. *See [note 2](https://github.com/ries07uw/HathiTrustYAMLgenerator/blob/master/HowTo.md#notes) below.*|
+| Reading Order ("Y"=L->R) | Enter "Y" for books that should be read from left to right. *See [note 2](https://github.com/ries07uw/HathiTrustYAMLgenerator/blob/master/HowTo.md#notes) below.* |
+| Filename extension | Enter filename extension of the image files here. (Examples: "tif", "jpg") |
+| Total number of images | Enter the total number of image files included in the item here. |
 | FRONT_COVER | |
 | TITLE_PARTS | |
 | TITLE | |
@@ -55,7 +57,7 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 - To prevent any alteration to date formats, etc., which would prevent processing, open the downloaded CSV file in a simple text-editing program such as [Notepad++](https://notepad-plus-plus.org/).
 - Delete column headers--all content coming before the first digit of the first item's barcode--from the CSV file, and save changes. 
 - STEPS FOR USING SCRIPT HERE
-- If images are uncompressed, the *image_compression_date*, *image_compression_agent*, and *image_compression_tool* lines should be deleted from output YAML files prior to upload. (See [NeededImprovements.md](NeededImprovements.md).)
+- If images are uncompressed, the *image_compression_date*, *image_compression_agent*, and *image_compression_tool* lines should be deleted from output YAML files prior to upload. (See [notes regarding needed improvements](NeededImprovements.md).)
 
 ### Notes:  
 1. Quotation marks are used above to indicate specific values for entry, but should *not* be entered in the spreadsheet.
