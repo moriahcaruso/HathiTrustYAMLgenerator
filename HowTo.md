@@ -6,7 +6,7 @@ Create a copy of [this template](https://docs.google.com/spreadsheets/d/1tXg4p4i
 - By entering information for multiple items in individual rows, multiple YAML files may be generated at once.
 - To prevent any alteration to date formats, etc., which would prevent processing, apply plain-text formatting to all cells in the data-entry spreadsheet.
 - An example spreadsheet complete with input values is available [here](https://docs.google.com/spreadsheets/d/1ixc8uVCmZAgtEU8S446XntZoeRVsCPcLSX_R-KnLD_4/edit?usp=sharing).
-- Example output YAML files--both generate from the sample spreadsheet above--are available here and here.--NEED LINKS
+- Example output YAML files--both generate from the sample spreadsheet above--are available [here](https://drive.google.com/a/uw.edu/file/d/1XL9BSejpJKPZbwVYZAmtgE4CiJe2pRmT/view?usp=sharing) and [here](https://drive.google.com/a/uw.edu/file/d/1MNK9B0tXiLXbOJW8AZ6pKKT5b-7uj5NY/view?usp=sharing).
 - Much of the documentation below has been taken directly from [ruthtillman's](https://github.com/ruthtillman) [yaml-generator-for-hathitrust](https://github.com/ruthtillman/yaml-generator-for-hathitrust) repository, which is the source of the Python script used here.
 - Information regarding conventions for the use of page tags (in ALL CAPS in the table below) was taken directly from HathiTrust documentation available [here](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view).  
 
