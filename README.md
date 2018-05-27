@@ -5,4 +5,4 @@ The purpose of adapting the Python script and documentation from the GitHub repo
 #### Notes:  
 - [Python 2.7.x](https://www.python.org/downloads/release/python-2715/) must be installed on the computer that will be used to generate YAML files.
 - The Python script for generating YAML files LINK HERE will need to be downloaded to this computer.  
-## Next: [How to record item information in a spreadsheet and process this information to generate YAML files](HowTo.md).
+### Next: [How to record item information in a spreadsheet and process this information to generate YAML files](HowTo.md).

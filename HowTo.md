@@ -1,15 +1,18 @@
 # How-to: Spreadsheet to CSV to YAML (.yml) file
 ### *(Please note that this documentation is currently under construction.)*  
 ## Recording item information
-Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p4iouy6OBnflIgYaC_AVBDDvhF_pym7eYVc6RMc/edit?usp=sharing)**. Fill in the required item information as detailed below. (Much of the documentation below has been taken directly from [ruthtillman's](https://github.com/ruthtillman) [yaml-generator-for-hathitrust](https://github.com/ruthtillman/yaml-generator-for-hathitrust) repository, which is the source of the Python script used here.)
-
+Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p4iouy6OBnflIgYaC_AVBDDvhF_pym7eYVc6RMc/edit?usp=sharing)**. Fill in required item information as detailed below.  
+(Much of the documentation below has been taken directly from [ruthtillman's](https://github.com/ruthtillman) [yaml-generator-for-hathitrust](https://github.com/ruthtillman/yaml-generator-for-hathitrust) repository, which is the source of the Python script used here.)  
+#### Notes
 - By entering information for multiple items in successive rows, multiple YAML files may be generated at once.
-- To prevent any alteration to date formats, etc., which would prevent processing, apply plain-text formatting to all cells in the data-entry spreadsheet.
-- Column headings in ALL CAPS below (FRONT_COVER, COPYRIGHT, etc.) are HathiTrust page tags, and image file numbers input in these columns will be tagged as such. Page-tag explanations in the table below were taken directly from a HathiTrust-provided example YAML file which is available **[here](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view)**.  (This example YAML file is linked to from the [HathiTrust Cloud Validation and Packaging Service document](https://docs.google.com/document/d/1OQ0SKAiOH8Xi0HVVxg4TryBrPUPtdv4qA70d8ghRltU/edit?usp=sharing).
-- It is important to remember that anytime you enter a number in the spreadsheet to indicate a captured page image or images, you are entering the number(s) for an *image file* or set of *image files*, **not** for pages in a book or document, the numbering of which will of course differ from that of image files. 
-- When entering image numbers in the spreadsheet, exclude leading zeros and filename extensions. For example, to input 00000001.tif, in the FRONT_COVER column, enter "1".
-- An example spreadsheet complete with input values is available [here](https://docs.google.com/spreadsheets/d/1ixc8uVCmZAgtEU8S446XntZoeRVsCPcLSX_R-KnLD_4/edit?usp=sharing).
+- To prevent any alteration to date formats, etc., which would prevent processing, apply plain-text formatting to all cells in your data-entry spreadsheet.
+- Column headings in ALL CAPS below (FRONT_COVER, COPYRIGHT, etc.) are HathiTrust page tags, and image file numbers input in these columns will be tagged as such. Page-tag explanations in the table below were taken directly from a HathiTrust-provided example YAML file which is available **[here](https://drive.google.com/file/d/0B0EHs5JWGUMLWjU2OHVhQzN5WEk/view)**.  (This example YAML file is linked to from the [HathiTrust Cloud Validation and Packaging Service document](https://docs.google.com/document/d/1OQ0SKAiOH8Xi0HVVxg4TryBrPUPtdv4qA70d8ghRltU/edit?usp=sharing).)
+- It is important to remember that anytime you enter a number in the spreadsheet to indicate a captured page image or images, you are entering the number(s) for an *image file* or set of *image files*, and *not* for pages in a book or document. 
+- When entering image file numbers in the spreadsheet, exclude leading zeros and filename extensions. For example, to input "00000001.tif" in the FRONT_COVER column, enter "1".
+#### Example files
+- An example data-entry spreadsheet complete with input values is available **[here](https://docs.google.com/spreadsheets/d/1ixc8uVCmZAgtEU8S446XntZoeRVsCPcLSX_R-KnLD_4/edit?usp=sharing)**.
 - Example output YAML files--both generated from the sample spreadsheet above--are available **[here](https://drive.google.com/a/uw.edu/file/d/1XL9BSejpJKPZbwVYZAmtgE4CiJe2pRmT/view?usp=sharing)** and **[here](https://drive.google.com/a/uw.edu/file/d/1MNK9B0tXiLXbOJW8AZ6pKKT5b-7uj5NY/view?usp=sharing)**. Note that YAML files output by the script will have the file extension ".yml", not "_YAML.txt" as in these sample files.  
+  
 
 | Column Heading | Input Instructions |
 | --- | --- |
@@ -21,7 +24,7 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 | "Y" if using BookDrive / If not, enter scanner model | Entering "Y" will output the value "BookDrive Mark II" in the "scanner_model" line of the output YAML file. If you are not using the Atiz BookDrive for capture, enter the model of the scanner or other digital capture device you are using. (Example: "Expression 12000XL") |
 | Bitone DPI | If the item was captured in black-and-white (bitone), enter the capture DPI value. If the item was captured in greyscale or color, enter zero (0). |
 | Contone DPI | If the item was captured in color or greyscale (contone), enter the capture DPI value here. If the item was captured in black-and-white (bitone), enter zero (0). |
-| Compression Date YYYY-MM-DD | Enter "N" if captured images were not compressed. |
+| Compression Date YYYY-MM-DD | Enter "N" if captured images are uncompressed. |
 | Compression Time HH:MM | Enter "N" if captured images are uncompressed. |
 | Compression DST: Y/N | Enter "N" if captured images are uncompressed. |
 | Compression Tool(s) | Enter "N" if captured images are uncompressed. |
