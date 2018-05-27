@@ -19,7 +19,7 @@ def scanningAndScannerInfo(f):
 	else:
 		scannerModel = 'scanner_model: ' + scannerModelInput + '\n'
 	# Default scanner user changed to UWL PS
-	scannerUser = 'scanner_user: "University of Washington"\n'
+	scannerUser = 'scanner_user: University of Washington\n'
 	if bitoneResInput != '0':
 		bitoneRes = 'bitonal_resolution_dpi: ' + bitoneResInput + '\n'
 	else:
