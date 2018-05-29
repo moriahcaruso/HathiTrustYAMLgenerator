@@ -13,6 +13,7 @@ Create a copy of **[this template](https://docs.google.com/spreadsheets/d/1tXg4p
 - An example data-entry spreadsheet complete with input values is available **[here](https://docs.google.com/spreadsheets/d/1ixc8uVCmZAgtEU8S446XntZoeRVsCPcLSX_R-KnLD_4/edit?usp=sharing)**.
 - Example output YAML files--both generated from the sample spreadsheet above--are available **[here](https://drive.google.com/a/uw.edu/file/d/1XL9BSejpJKPZbwVYZAmtgE4CiJe2pRmT/view?usp=sharing)** and **[here](https://drive.google.com/a/uw.edu/file/d/1MNK9B0tXiLXbOJW8AZ6pKKT5b-7uj5NY/view?usp=sharing)**. Note that YAML files output by the script will have the file extension ".yml", not "_YAML.txt" as in these sample files.  
   
+  
 
 | Column Heading | Input Instructions |
 | --- | --- |
