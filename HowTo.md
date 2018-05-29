@@ -60,8 +60,13 @@ Much of the documentation below has been taken directly from the **[Field Guide]
 - Download the sheet with input values in CSV format.
 - To prevent any alteration to date formats, etc., which would prevent processing, open the downloaded CSV file in a simple text-editing program such as [Notepad++](https://notepad-plus-plus.org/).
 - Delete column headers--all content coming before the first digit of the first item's barcode--from the CSV file, and save changes. 
-- STEPS FOR USING SCRIPT HERE
+- Open the [Python script](MODIFIED_yaml_csv.py).
+- Input the filepath, including filename, of the saved CSV file.
+- Input the filepath where output YAML files should be saved.
+- Confirm generated YAML file output.
 - If images are uncompressed, the *image_compression_date*, *image_compression_agent*, and *image_compression_tool* lines should be deleted from output YAML files prior to upload. (See [notes regarding needed improvements](NeededImprovements.md).)
 
 ### Note:  
 - [YGfHT/FG](https://github.com/ruthtillman/yaml-generator-for-hathitrust/blob/master/field_guide.md#information-about-scanning): "While HathiTrust can handle books where the last page or back cover is 00000001, this YAML output tool can only handle 'normal' English reading order if books were scanned in the same direction as they should be read. i.e. if they should be read right-to-left, then it can handle a right-to-left scan, but it can't handle a book read left-to-right but scanned right-to-left."
+
+#### Next: [Ideas for future improvements](NeededImprovements.md)
