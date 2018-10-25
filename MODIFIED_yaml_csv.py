@@ -2,8 +2,9 @@ import re, os, csv
 
 # A function that handles all the defaults and input for scanning information:
 # DST offset changed from original code to Seattle time
+# Removed compression from global def
 def scanningAndScannerInfo(f):
-	global captureDate, scannerMake, scannerModel, scannerUser, bitoneRes, contoneRes, scanningOrder, readingOrder, imageCompressionAgent, imageCompressionDate, imageCompressionTool, imageCompressionToolList
+	global captureDate, scannerMake, scannerModel, scannerUser, bitoneRes, contoneRes, scanningOrder, readingOrder
 	if DST.lower() == 'yes' or DST.lower() == 'y':
 		DSTOffset = '7'
 	else:
@@ -28,26 +29,6 @@ def scanningAndScannerInfo(f):
 		contoneRes = 'contone_resolution_dpi: ' + contoneResInput + '\n'
 	else:
 		contoneRes = ''
-	if imageCompression.lower() == 'yes' or imageCompression.lower() == 'y':
-		# Only the Agent has been changed, all other image compression defaults, etc., are as in original code
-		# For further development--change script so that no compression info is put into YAML if no values are present
-		imageCompressionAgent = 'image_compression_agent: universityofwashington\n'
-		if compressionDST.lower() == 'yes' or compressionDST.lower() == 'y':
-			compressionDSTOffset = '6'
-		else:
-			compressionDSTOffset = '5'
-		imageCompressionDate = 'image_compression_date: ' + imageCompressionYearMonthDay + 'T' + imageCompressionTime + ':00-0' + compressionDSTOffset + ':00\n'
-		if "," in imageCompressionToolList:
-		    splitList = imageCompressionToolList.split(", ")
-		    imageCompressionToolList = ''
-		    for tool in splitList:
-		        if tool == splitList[-1]:
-		            imageCompressionToolList += '"' + tool + '"'
-		        else:
-		            imageCompressionToolList += '"' + tool + '", '
-		else:
-		    imageCompressionToolList = '"' + imageCompressionToolList + '"'
-		imageCompressionTool = 'image_compression_tool: [' + imageCompressionToolList + ']\n'
 	if scanningOrderInput.lower() == 'yes' or scanningOrderInput.lower() == 'y':
 		scanningOrder = 'scanning_order: left-to-right\n'
 	elif scanningOrderInput.lower() == 'no' or scanningOrderInput.lower() == 'n':
@@ -68,10 +49,6 @@ def scanningAndScannerInfo(f):
 		f.write(bitoneRes)
 	if contoneRes != '':
 		f.write(contoneRes)
-	if imageCompression.lower() == 'yes' or imageCompression.lower() == 'y':
-		f.write(imageCompressionDate)
-		f.write(imageCompressionAgent)
-		f.write(imageCompressionTool)
 	f.write(scanningOrder)
 	f.write(readingOrder)
 
@@ -323,7 +300,7 @@ def writeFile():
 
 # Putting input into a function vs. having a huge list of inputs at the end.
 def gatherInput():
-	global fileType, workingDir, finalNumber, readingStartNum, readingEndNum, frontCover, outputFile, backCover, blankPages, chapterPages, chapterStart, copyrightPages, firstChapterStart, foldoutPages, imagePages, indexStart, multiworkBoundaries, prefacePages, referenceStartPages, tableOfContentsStarts, titlePages, halfTitlePages, romanStart, romanCap, scanYearMonthDay, scanTime, DST, scannerModelInput, scannerMakeInput, bitoneResInput, contoneResInput, compressionDST, imageCompression, imageCompressionTime, imageCompressionTool, imageCompressionYearMonthDay, imageCompressionTime, imageCompressionAgent, imageCompressionToolList, scanningOrderInput, readingOrderInput, unpaginatedPages
+	global fileType, workingDir, finalNumber, readingStartNum, readingEndNum, frontCover, outputFile, backCover, blankPages, chapterPages, chapterStart, copyrightPages, firstChapterStart, foldoutPages, imagePages, indexStart, multiworkBoundaries, prefacePages, referenceStartPages, tableOfContentsStarts, titlePages, halfTitlePages, romanStart, romanCap, scanYearMonthDay, scanTime, DST, scannerModelInput, scannerMakeInput, bitoneResInput, contoneResInput, scanningOrderInput, readingOrderInput, unpaginatedPages
 	pathToFile = raw_input("Provide a link to the CSV file: ")
 	workingDir = raw_input("Provide the directory in which the finished file should be placed: ")
 	hathi_file = open(pathToFile)
@@ -353,106 +330,106 @@ def gatherInput():
 		    contoneResInput = "0"
 		else:
 		    contoneResInput = row[7]
-		if row[12] == '':
+		if row[9] == '':
 		    scanningOrderInput = 'Y'
 		else:
-		    scanningOrderInput = row[12]
-		if row[13] == '':
+		    scanningOrderInput = row[9]
+		if row[10] == '':
 		    readingOrderInput = 'Y'
 		else:
-		    readingOrderInput = row[13]
-		if row[15] == '':
+		    readingOrderInput = row[10]
+		if row[11] == '':
 		    finalNumber = 0
 		else:
-		    finalNumber = int(row[15])
-		if row[16] == '':
+		    finalNumber = int(row[11])
+		if row[12] == '':
 		    frontCover = 0
 		else:
-		    frontCover = int(row[16])
-		if row[17] == '':
+		    frontCover = int(row[12])
+		if row[13] == '':
 		    halfTitlePages = "0"
 		else:
-		    halfTitlePages = row[17]
-		if row[18] == '':
+		    halfTitlePages = row[13]
+		if row[14] == '':
 		    titlePages = "0"
 		else:
-		    titlePages = row[18]
-		if row[19] == '':
+		    titlePages = row[14]
+		if row[15] == '':
 		    copyrightPages = "0"
 		else:
-		    copyrightPages = row[19]
-		if row[20] == '':
+		    copyrightPages = row[15]
+		if row[16] == '':
 		    tableOfContentsStarts = "0"
 		else:
-		    tableOfContentsStarts = row[20]
-		if row[21] == '':
+		    tableOfContentsStarts = row[16]
+		if row[17] == '':
 		    romanStart = "0"
 		else:
-		    romanStart = row[21]
-		if row[22] == '':
+		    romanStart = row[17]
+		if row[18] == '':
 		    romanCap = "0"
 		else:
-		    romanCap = row[22]
-		if row[23] == '':
+		    romanCap = row[18]
+		if row[19] == '':
 		    prefacePages = "0"
 		else:
-		    prefacePages = row[23]
-		if row[24] == '':
+		    prefacePages = row[19]
+		if row[20] == '':
 		    readingStartNum = "0"
 		else:
-		    readingStartNum = row[24]
-		if row[25] == '':
+		    readingStartNum = row[20]
+		if row[21] == '':
 		    firstChapterStart = "0"
 		else:
-		    firstChapterStart = row[25]
-		if row[26] == '':
+		    firstChapterStart = row[21]
+		if row[22] == '':
 		    chapterPages = "0"
 		else:
-		    chapterPages = row[26]
-		if row[27] == '':
+		    chapterPages = row[22]
+		if row[23] == '':
 		    chapterStart = "0"
 		else:
-		    chapterStart = row[27]
-		if row[28] == '':
+		    chapterStart = row[23]
+		if row[24] == '':
 		    readingEndNum = "0"
 		else:
-		    readingEndNum = row[28]
-		if row[29] == '':
+		    readingEndNum = row[24]
+		if row[25] == '':
 		    blankPages = "0"
 		else:
-		    blankPages = row[29]
-		if row[30] == '':
+		    blankPages = row[25]
+		if row[26] == '':
 		    unpaginatedPages = "0"
 		else:
-		    unpaginatedPages = row[30]
-		if row[31] == '':
+		    unpaginatedPages = row[26]
+		if row[27] == '':
 		    imagePages = "0"
 		else:
-		    imagePages = row[31]
-		if row[32] == '':
+		    imagePages = row[27]
+		if row[28] == '':
 		    foldoutPages = "0"
 		else:
-		    foldoutPages = row[32]
-		if row[33] == '':
+		    foldoutPages = row[28]
+		if row[29] == '':
 		    indexStart = "0"
 		else:
-		    indexStart = row[33]
-		if row[34] == '':
+		    indexStart = row[29]
+		if row[30] == '':
 		    referenceStartPages = "0"
 		else:
-		    referenceStartPages = row[34]
-		if row[35] == '':
+		    referenceStartPages = row[30]
+		if row[31] == '':
 		    multiworkBoundaries = "0"
 		else:
-		    multiworkBoundaries = row[35]
-		if row[36] == '':
+		    multiworkBoundaries = row[31]
+		if row[32] == '':
 		    backCover = 0
 		else:
-		    backCover = int(row[36])
-		if row[14] == '':
+		    backCover = int(row[32])
+		if row[10] == '':
 		    fileType = 'tif'
 		else:
-		    fileType = row[14]
+		    fileType = row[10]
 		if row[4] == '':
 		    scannerMakeInput = 'y'
 		else:
@@ -461,26 +438,6 @@ def gatherInput():
 		    scannerModelInput = 'y'
 		else:
 		    scannerModelInput = row[5]
-		if row[8] == '':
-		    imageCompression = 'n'
-		else:
-		    imageCompression = 'y'
-		if row[8] == '':
-		  imageCompressionYearMonthDay = "0"
-		else:
-		  imageCompressionYearMonthDay = row[8]
-		if row[9] == '':
-		  imageCompressionTime = "0"
-		else:
-		  imageCompressionTime = row[9]
-		if row[10] == '':
-		  compressionDST = "0"
-		else:
-		  compressionDST = row[10]
-		if row[11] == '':
-		  imageCompressionToolList = "0"
-		else:
-		  imageCompressionToolList = row[11]
-		writeFile()
+				writeFile()
 
 gatherInput()
