@@ -438,6 +438,6 @@ def gatherInput():
 		    scannerModelInput = 'y'
 		else:
 		    scannerModelInput = row[5]
-				writeFile()
+		writeFile()
 
 gatherInput()
