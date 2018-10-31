@@ -305,6 +305,7 @@ def gatherInput():
 	workingDir = raw_input("Provide the directory in which the finished file should be placed: ")
 	hathi_file = open(pathToFile)
 	hathi_csv = csv.reader(hathi_file)
+	next(hathi_csv, None)
 	for row in hathi_csv:
 		if row[0] == '':
 			outputFile = 'no_barcode'
