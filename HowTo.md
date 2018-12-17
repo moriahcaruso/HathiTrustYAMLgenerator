@@ -60,7 +60,6 @@ Much of the documentation below has been taken directly from the **[Field Guide]
 ## Generating a YAML file for upload
 - Download the sheet with input values in CSV format.
 - To prevent any alteration to date formats, etc., which would prevent processing, open the downloaded CSV file in a simple text-editing program such as [Notepad++](https://notepad-plus-plus.org/).
-- Delete column headers--all content coming before the first digit of the first item's barcode--from the CSV file, and save changes. 
 - Open the [Python script](MODIFIED_yaml_csv.py).
 - Input the filepath, including filename, of the saved CSV file.
 - Input the filepath where output YAML files should be saved.
