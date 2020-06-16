@@ -93,13 +93,13 @@ def generateOrderLabel(fileNum):
 # If this is a Multiwork item (note, does not function right if no multiwork boundary input), casts the numbers to start/end lists, then defines start/end numbers. Lots of globals because they'll need to be manipulated more elsewhere.
 def defineMultiWorkLists():
 	global readingStartNum, readingEndNum, multiworkStartList, multiworkEndList, romanStartList, romanEndList, romanStart, romanCap
-	multiworkStartList = map(int, readingStartNum.split(", "))
-	multiworkEndList = map(int, readingEndNum.split(", "))
+	multiworkStartList = list(map(int, readingStartNum.split(", ")))
+	multiworkEndList = list(map(int, readingEndNum.split(", ")))
 	readingStartNum = multiworkStartList[0]
 	readingEndNum = multiworkEndList[0]
 	if ", " in romanStart:
-		romanStartList = map(int, romanStart.split(", "))
-		romanEndList = map(int, romanCap.split(", "))
+		romanStartList = list(map(int, romanStart.split(", ")))
+		romanEndList = list(map(int, romanCap.split(", ")))
 		romanStart = romanStartList[0]
 		romanCap = romanEndList[0]
 #	if type(romanStart).__name__ != 'int':
@@ -161,63 +161,63 @@ def fromRoman(s):
 def inputToLists():
 	global blankPages, chapterPages, chapterStart, copyrightPages, firstChapterStart, foldoutPages, imagePages, indexStart, multiworkBoundaries, prefacePages, referenceStartPages, tableOfContentsStarts, titlePages, halfTitlePages, unpaginatedPages
 	if ", " in blankPages:
-		 blankPages = map(int, blankPages.split(", "))
+		 blankPages = list(map(int, blankPages.split(", ")))
 	else:
 		blankPages = [int(blankPages)]
 	if ", " in chapterPages:
-		 chapterPages = map(int, chapterPages.split(", "))
+		 chapterPages = list(map(int, chapterPages.split(", ")))
 	else:
 		chapterPages = [int(chapterPages)]
 	if ", " in chapterStart:
-		 chapterStart = map(int, chapterStart.split(", "))
+		 chapterStart = list(map(int, chapterStart.split(", ")))
 	else:
 		chapterStart = [int(chapterStart)]
 	if ", " in copyrightPages:
-		 copyrightPages = map(int, copyrightPages.split(", "))
+		 copyrightPages = list(map(int, copyrightPages.split(", ")))
 	else:
 		copyrightPages = [int(copyrightPages)]
 	if ", " in firstChapterStart:
-		 firstChapterStart = map(int, firstChapterStart.split(", "))
+		 firstChapterStart = list(map(int, firstChapterStart.split(", ")))
 	else:
 		firstChapterStart = [int(firstChapterStart)]
 	if ", " in foldoutPages:
-		 foldoutPages = map(int, foldoutPages.split(", "))
+		 foldoutPages = list(map(int, foldoutPages.split(", ")))
 	else:
 		foldoutPages = [int(foldoutPages)]
 	if ", " in imagePages:
-		 imagePages = map(int, imagePages.split(", "))
+		 imagePages = list(map(int, imagePages.split(", ")))
 	else:
 		imagePages = [int(imagePages)]
 	if ", " in indexStart:
-		 indexStart = map(int, indexStart.split(", "))
+		 indexStart = list(map(int, indexStart.split(", ")))
 	else:
 		indexStart = [int(indexStart)]
 	if ", " in multiworkBoundaries:
-		 multiworkBoundaries = map(int, multiworkBoundaries.split(", "))
+		 multiworkBoundaries = list(map(int, multiworkBoundaries.split(", ")))
 	else:
 		multiworkBoundaries = [int(multiworkBoundaries)]
 	if ", " in prefacePages:
-		 prefacePages = map(int, prefacePages.split(", "))
+		 prefacePages = list(map(int, prefacePages.split(", ")))
 	else:
 		prefacePages = [int(prefacePages)]
 	if ", " in unpaginatedPages:
-		 unpaginatedPages = map(int, unpaginatedPages.split(", "))
+		 unpaginatedPages = list(map(int, unpaginatedPages.split(", ")))
 	else:
 		unpaginatedPages = [int(unpaginatedPages)]
 	if ", " in referenceStartPages:
-		 referenceStartPages = map(int, referenceStartPages.split(", "))
+		 referenceStartPages = list(map(int, referenceStartPages.split(", ")))
 	else:
 		referenceStartPages = [int(referenceStartPages)]
 	if ", " in tableOfContentsStarts:
-		 tableOfContentsStarts = map(int, tableOfContentsStarts.split(", "))
+		 tableOfContentsStarts = list(map(int, tableOfContentsStarts.split(", ")))
 	else:
 		tableOfContentsStarts = [int(tableOfContentsStarts)]
 	if ", " in titlePages:
-		 titlePages = map(int, titlePages.split(", "))
+		 titlePages = list(map(int, titlePages.split(", ")))
 	else:
 		titlePages = [int(titlePages)]
 	if ", " in halfTitlePages:
-		 halfTitlePages = map(int, halfTitlePages.split(", "))
+		 halfTitlePages = list(map(int, halfTitlePages.split(", ")))
 	else:
 		halfTitlePages = [int(halfTitlePages)]
 
@@ -295,14 +295,14 @@ def writeFile():
 		f.write(output)
 		fileNum += 1
 	f.close()
-	print "File " + outputFile + " created in " + workingDir
+	print("File " + outputFile + " created in " + workingDir)
 	os.chdir(originalDir)
 
 # Putting input into a function vs. having a huge list of inputs at the end.
 def gatherInput():
 	global fileType, workingDir, finalNumber, readingStartNum, readingEndNum, frontCover, outputFile, backCover, blankPages, chapterPages, chapterStart, copyrightPages, firstChapterStart, foldoutPages, imagePages, indexStart, multiworkBoundaries, prefacePages, referenceStartPages, tableOfContentsStarts, titlePages, halfTitlePages, romanStart, romanCap, scanYearMonthDay, scanTime, DST, scannerModelInput, scannerMakeInput, bitoneResInput, contoneResInput, scanningOrderInput, readingOrderInput, unpaginatedPages
-	pathToFile = raw_input("Provide a link to the CSV file: ")
-	workingDir = raw_input("Provide the directory in which the finished file should be placed: ")
+	pathToFile = input("Provide a link to the CSV file: ")
+	workingDir = input("Provide the directory in which the finished file should be placed: ")
 	hathi_file = open(pathToFile)
 	hathi_csv = csv.reader(hathi_file)
 	next(hathi_csv, None)
