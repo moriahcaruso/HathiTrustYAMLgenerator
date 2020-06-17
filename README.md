@@ -3,7 +3,7 @@
 ## Python script and documentation adapted from [yaml-generator-for-hathitrust](https://github.com/ruthtillman/yaml-generator-for-hathitrust) created by [ruthtillman](https://github.com/ruthtillman)  
 
 ### This repository includes a Python script which uses an input CSV file to generate a YAML metadata file or files for uploading material to the **[HathiTrust digital library](https://www.hathitrust.org/)**.  
-The purpose of adapting the Python script and documentation from the GitHub repository referenced above was to customize them for use at the **[University of Washington Libraries Preservation Services](http://www.lib.washington.edu/preservation)** unit.  
+The purpose of adapting the Python script and documentation from the GitHub repository referenced above was to update and customize them for use at the **[University of Washington Libraries Preservation Services](http://www.lib.washington.edu/preservation)** unit.  
 
 ### The overall workflow is as follows, and is detailed in the **[how-to](https://github.com/ries07uw/HathiTrustYAMLgenerator/blob/master/HowTo.md)** file provided in this repository:
 - **[Python 3.x](https://www.python.org/downloads/)** must be installed on the computer that will be used to generate YAML files, and the **[csv-to-yml.py](https://github.com/moriahcaruso/HathiTrustYAMLgenerator/blob/master/csv-to-yml.py)** script will need to be downloaded as well.  
