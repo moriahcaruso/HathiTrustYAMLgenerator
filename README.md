@@ -11,7 +11,7 @@ The purpose of adapting the Python script and documentation from the GitHub repo
 - Save the completed spreadsheet containing information about one or more digitized items as a CSV file.
 - Run the [csv-to-yml.py](https://github.com/moriahcaruso/HathiTrustYAMLgenerator/blob/master/csv-to-yml.py) script 
 - When prompted, enter the filepath to the saved CSV file.
-- Whe, prompted, enter the filepath where generated YAML files should be saved.
+- When prompted, enter the filepath where generated YAML files should be saved.
 - Confirm generated files and package along with page image files, OCR files, etc. for upload to the HathiTrust.  
 
 ### Next: [How to record item information in a spreadsheet and process this information to generate YAML files](HowTo.md).
