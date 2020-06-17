@@ -6,7 +6,7 @@
 The purpose of adapting the Python script and documentation from the GitHub repository referenced above was to customize them for use at the **[University of Washington Libraries Preservation Services](http://www.lib.washington.edu/preservation)** unit.  
 
 ### The overall workflow is as follows, and is detailed in the **[how-to](https://github.com/ries07uw/HathiTrustYAMLgenerator/blob/master/HowTo.md)** file provided in this repository:
-- **[Python 3.x](https://www.python.org/downloads/)** must be installed on the computer that will be used to generate YAML files, and the **[csv-to-yml.py](csv-to-yml.py)** script will need to be downloaded as well.  
+- **[Python 3.x](https://www.python.org/downloads/)** must be installed on the computer that will be used to generate YAML files, and the **[csv-to-yml.py](https://github.com/moriahcaruso/HathiTrustYAMLgenerator/blob/master/csv-to-yml.py)** script will need to be downloaded as well.  
 - Create a copy of the **[data-entry spreadsheet template](https://drive.google.com/open?id=1tXg4p4iouy6OBnflIgYaC_AVBDDvhF_pym7eYVc6RMc)** and enter information about the digitized item, the digital capture process, etc. 
 - Save the completed spreadsheet containing information about one or more digitized items as a CSV file.
 - Run the csv-to-yml.py script 
