@@ -9,9 +9,9 @@ The purpose of adapting the Python script and documentation from the GitHub repo
 - **[Python 3.x** must be installed on the computer that will be used to generate YAML files, and the **[csv-to-yml.py](https://github.com/moriahcaruso/HathiTrustYAMLgenerator/blob/master/csv-to-yml.py)** script will need to be downloaded as well.  
 - Create a copy of the **[data-entry spreadsheet template](https://drive.google.com/open?id=1tXg4p4iouy6OBnflIgYaC_AVBDDvhF_pym7eYVc6RMc)** and enter information about the digitized item, the digital capture process, etc. 
 - Save the completed spreadsheet containing information about one or more digitized items as a CSV file.
-- Run the provided Python script 
-- Enter the filepath to the saved CSV file.
-- Enter the filepath where generated YAML files should be saved.
+- Run the csv-to-yml.py script 
+- When prompted, enter the filepath to the saved CSV file.
+- Whe, prompted, enter the filepath where generated YAML files should be saved.
 - Confirm generated files and package along with page image files, OCR files, etc. for upload to the HathiTrust.  
 
 ### Next: [How to record item information in a spreadsheet and process this information to generate YAML files](HowTo.md).
