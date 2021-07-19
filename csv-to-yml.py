@@ -334,11 +334,11 @@ def gatherInput():
 		if row[9] == '':
 		    scanningOrderInput = 'Y'
 		else:
-		    scanningOrderInput = row[9]
+		    scanningOrderInput = row[8]
 		if row[10] == '':
 		    readingOrderInput = 'Y'
 		else:
-		    readingOrderInput = row[10]
+		    readingOrderInput = row[9]
 		if row[11] == '':
 		    finalNumber = 0
 		else:
